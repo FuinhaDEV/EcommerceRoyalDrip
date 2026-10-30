@@ -1,0 +1,166 @@
+/* ===== PÁGINA DE PEDIDOS =====
+   Usa as variáveis e classes globais de static/style.css
+   (.cabecalho, nav, .voltar, .alerta, .alerta-erro, footer).
+   Carregue style.css ANTES deste arquivo. */
+
+.pedidos-page {
+  max-width: 1200px;
+  margin: 32px auto 48px;
+  padding: 0 20px;
+}
+
+.pedidos-titulo {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: clamp(1.7rem, 2vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pedidos-subtitulo {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.pedidos-card {
+  background: #fff;
+  border-radius: 12px;
+  border-top: 4px solid #001f54;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+/* ----- tabela (mesmo padrão da .tabela-medidas) ----- */
+
+.tabela-pedidos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabela-pedidos th,
+.tabela-pedidos td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela-pedidos th {
+  background: #f5f5f5;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #111;
+  white-space: nowrap;
+}
+
+.tabela-pedidos tbody tr {
+  transition: background 0.2s ease;
+}
+
+.tabela-pedidos tbody tr:hover {
+  background: #fafafa;
+}
+
+.tabela-pedidos tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pedido-numero {
+  font-weight: 700;
+  color: #001f54;
+}
+
+.pedido-valor {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.col-direita {
+  text-align: right !important;
+}
+
+/* ----- status (mesma paleta verde da .frete) ----- */
+
+.status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #f0f8ed;
+  color: #2d5a28;
+  border: 1px solid #cfe5c8;
+}
+
+/* ----- avisos (erro reaproveita .alerta / .alerta-erro do style.css) ----- */
+
+.pedidos-aviso {
+  margin: 0;
+}
+
+.alerta-vazio {
+  background: #eef2fa;
+  border-left: 4px solid #001f54;
+  color: #001f54;
+}
+
+/* ----- voltar ----- */
+
+.pedidos-page .voltar {
+  margin: 24px 0 0;
+  font-weight: 600;
+}
+
+/* ===== Responsivo: cada linha vira um card ===== */
+
+@media (max-width: 768px) {
+  .pedidos-page {
+    margin-top: 24px;
+  }
+
+  .tabela-pedidos thead {
+    display: none;
+  }
+
+  .tabela-pedidos,
+  .tabela-pedidos tbody,
+  .tabela-pedidos tr,
+  .tabela-pedidos td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabela-pedidos tr {
+    padding: 12px 18px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .tabela-pedidos tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .tabela-pedidos td,
+  .col-direita {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 0;
+    border-bottom: none;
+    text-align: right !important;
+  }
+
+  .tabela-pedidos td::before {
+    content: attr(data-label);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-align: left;
+  }
+}

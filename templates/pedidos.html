@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block titulo %}Pedidos | Royal Drip{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pedidos.css') }}" />
+{% endblock %}
+
+{% block conteudo %}
+<main class="pedidos-page">
+  <h1 class="pedidos-titulo">Meus pedidos</h1>
+  <p class="pedidos-subtitulo">Pedidos feitos na sua conta.</p>
+
+  {% if erro %}
+  <div class="alerta alerta-erro pedidos-aviso">{{ erro }}</div>
+  {% elif pedidos %}
+  <div class="pedidos-card">
+    <table class="tabela-pedidos">
+      <thead>
+        <tr>
+          <th>Pedido</th>
+          <th>Data</th>
+          <th>Status</th>
+          <th class="col-direita">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in pedidos %}
+        <tr>
+          <td data-label="Pedido" class="pedido-numero">#{{ p.id_pedido }}</td>
+          <td data-label="Data">
+            {{ p.data_pedido.strftime("%d/%m/%Y %H:%M") if p.data_pedido else "-" }}
+          </td>
+          <td data-label="Status">
+            <span class="status">{{ p.status_pedido or "-" }}</span>
+          </td>
+          <td data-label="Total" class="pedido-valor col-direita">
+            R$ {{ "%.2f"|format(p.valor_total or 0)|replace(".", ",") }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alerta alerta-vazio pedidos-aviso">
+    Nenhum pedido cadastrado até o momento.
+  </div>
+  {% endif %}
+
+  <a class="voltar" href="{{ url_for('index') }}">&larr; Voltar para a loja</a>
+</main>
+{% endblock %}
