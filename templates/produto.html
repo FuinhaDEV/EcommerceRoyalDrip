@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ produto.titulo }} | Royal Drip{% endblock %}
+
+{% block conteudo %}
+<main class="produto-pagina" style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; padding: 32px 16px">
+  <section class="produto-galeria" style="flex: 1 1 360px; max-width: 520px">
+    <img
+      src="{{ url_for('static', filename=produto.imagem) }}"
+      alt="{{ produto.titulo }}"
+      decoding="async"
+      style="width: 100%; height: auto; border-radius: 8px"
+    />
+  </section>
+
+  <aside class="produto-info" style="flex: 1 1 340px; max-width: 480px">
+    <h1>{{ produto.titulo }}</h1>
+    <p class="preco">R$ {{ "%.2f"|format(produto.preco)|replace(".", ",") }}</p>
+
+    <p class="preco-info">
+      4 x de R$ {{ "%.2f"|format(produto.preco / 4)|replace(".", ",") }} sem juros<br />
+    </p>
+
+    <div class="detalhes">
+      <strong>Descrição:</strong><br />
+      {{ produto.descricao }}
+    </div>
+
+    <div class="frete"><strong>Frete grátis</strong> a partir de R$297,00</div>
+
+    <!-- Formulário Único de Adição ao Carrinho -->
+    <form action="{{ url_for('adicionar_carrinho') }}" method="POST" class="tabela-tamanho">
+      <input type="hidden" name="produto_id" value="{{ produto.id }}" />
+
+      <h3>TAMANHO</h3>
+      <div class="tamanhos">
+        {% for tamanho in produto.tamanhos %}
+        <label class="tamanho">
+          <input type="radio" name="tamanho" value="{{ tamanho }}" required />
+          <span>{{ tamanho }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      {% if produto.medidas and produto.medidas[0].Q is defined %}
+      <details class="medidas-link" style="margin: 10px 0">
+        <summary style="cursor: pointer">Tabela de medidas (cm)</summary>
+        <table style="border-collapse: collapse; margin-top: 8px; font-size: 0.9rem">
+          <thead>
+            <tr>
+              <th style="padding: 4px 10px; text-align: left">Tam.</th>
+              <th style="padding: 4px 10px">Largura (Q)</th>
+              <th style="padding: 4px 10px">Altura (A)</th>
+              <th style="padding: 4px 10px">Comprim. (L)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for m in produto.medidas %}
+            <tr>
+              <td style="padding: 4px 10px"><strong>{{ m.tamanho }}</strong></td>
+              <td style="padding: 4px 10px; text-align: center">{{ m.Q }}</td>
+              <td style="padding: 4px 10px; text-align: center">{{ m.A }}</td>
+              <td style="padding: 4px 10px; text-align: center">{{ m.L }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </details>
+      {% endif %}
+
+      <div class="acoes">
+        <label for="quantidade" style="font-size: 0.9rem; margin-top: 12px; display: block">
+          QUANTIDADE
+        </label>
+        <input
+          type="number"
+          id="quantidade"
+          name="quantidade"
+          value="1"
+          min="1"
+          max="10"
+          required
+          style="width: 80px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 15px"
+        />
+
+        <button type="submit" class="comprar">ADICIONAR AO CARRINHO</button>
+      </div>
+    </form>
+  </aside>
+</main>
+{% endblock %}

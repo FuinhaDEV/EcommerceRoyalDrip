@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %}Meu Carrinho | Royal Drip{% endblock %}
+
+{% block conteudo %}
+<main style="max-width: 900px; margin: 0 auto; padding: 24px 16px">
+  <h1>Meu Carrinho</h1>
+
+  {% if itens %}
+  <div class="carrinho-lista">
+    {% for item in itens %}
+    <div class="carrinho-item" style="display: flex; gap: 20px; align-items: center; margin-bottom: 15px">
+      <img
+        src="{{ url_for('static', filename=item.produto.imagem) }}"
+        alt="{{ item.produto.titulo }}"
+        width="80"
+        loading="lazy"
+        decoding="async"
+      />
+      <div style="flex: 1">
+        <h3>{{ item.produto.titulo }}</h3>
+        <p>Tamanho: {{ item.tamanho }} | Qtd: {{ item.quantidade }}</p>
+        <p>Preço unitário: R$ {{ "%.2f"|format(item.produto.preco)|replace(".", ",") }}</p>
+        <p><strong>Subtotal: R$ {{ "%.2f"|format(item.subtotal)|replace(".", ",") }}</strong></p>
+      </div>
+      <form action="{{ url_for('remover_carrinho', id_carrinho=item.id_carrinho) }}" method="POST">
+        <button type="submit">Remover</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+
+  <hr />
+  <h2>Total: R$ {{ "%.2f"|format(total)|replace(".", ",") }}</h2>
+
+  <form action="{{ url_for('finalizar_compra') }}" method="POST">
+    <button type="submit" class="comprar">Finalizar Compra</button>
+  </form>
+  {% else %}
+  <p>Seu carrinho está vazio.</p>
+  <a href="{{ url_for('index') }}">Voltar para os produtos</a>
+  {% endif %}
+</main>
+{% endblock %}
