@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Cliente - Royal Drip</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script>
+      function validarFormulario() {
+        let nome = document.getElementById("nome").value.trim();
+        let telefone = document.getElementById("telefone").value.replace(/\D/g, "");
+        let email = document.getElementById("email").value.trim();
+        let cep = document.getElementById("cep").value.replace(/\D/g, "");
+        let senha = document.getElementById("senha").value;
+        let confirmarSenha = document.getElementById("confirmarSenha").value;
+
+        if (
+          nome === "" ||
+          telefone === "" ||
+          email === "" ||
+          cep === "" ||
+          senha === "" ||
+          confirmarSenha === ""
+        ) {
+          alert("Preencha todos os campos!");
+          return false;
+        }
+
+        if (!email.includes("@")) {
+          alert("E-mail inválido!");
+          return false;
+        }
+
+        if (telefone.length < 10 || telefone.length > 11) {
+          alert("Telefone inválido! Use DDD + número (10 ou 11 dígitos).");
+          return false;
+        }
+
+        if (cep.length !== 8) {
+          alert("CEP deve ter 8 números!");
+          return false;
+        }
+
+        if (senha.length < 6) {
+          alert("A senha deve ter pelo menos 6 caracteres!");
+          return false;
+        }
+
+        if (senha !== confirmarSenha) {
+          alert("As senhas não coincidem!");
+          return false;
+        }
+
+        // Tudo certo: o formulário é enviado ao servidor (o Flask confirma o cadastro).
+        return true;
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Cabeçalho com Logo -->
+    <header class="cabecalho">
+      <div class="logo">
+        <img
+          class="brand-image"
+          src="/static/imagens/Logo Marca/logo marca (1).png"
+          alt="Royal Drip"
+        />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Formulário de Cadastro -->
+    <main class="registro-container">
+      <div class="registro-card">
+        <h1 class="registro-titulo">Criar uma Conta</h1>
+        <p class="registro-subtitulo">Cadastre-se e comece a comprar</p>
+
+        {% if erros %}
+          <div class="alertas">
+            {% for erro in erros %}
+              <div class="alerta alerta-erro">
+                ⚠️ {{ erro }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- method="post" e action são obrigatórios: sem eles o navegador envia por GET
+             e o Flask nunca recebe os dados para gravar no banco -->
+        <form
+          class="registro-form"
+          method="post"
+          action="{{ url_for('registro') }}"
+          onsubmit="return validarFormulario();"
+        >
+          <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Ex.: Maria Perez"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="seu@email.com.br"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input
+              type="tel"
+              id="telefone"
+              name="telefone"
+              placeholder="11999999999"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="cep">CEP</label>
+            <input
+              type="text"
+              id="cep"
+              name="cep"
+              placeholder="00000000"
+              maxlength="8"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Mínimo 6 caracteres"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmarSenha">Confirmar Senha</label>
+            <input
+              type="password"
+              id="confirmarSenha"
+              name="confirmarSenha"
+              placeholder="Repita sua senha"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-cadastrar">Cadastrar</button>
+        </form>
+
+        <p class="login-link">
+          Já possui uma conta? <a href="/login">Faça login aqui</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <p>&copy; 2026 Royal Drip. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

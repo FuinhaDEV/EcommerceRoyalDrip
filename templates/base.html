@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block titulo %}Royal Drip | Streetwear{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <!-- Cabeçalho Principal (compartilhado por todas as páginas) -->
+    <header class="cabecalho">
+      <div class="header-icons">
+        <div class="account-menu">
+          <button aria-label="Minha conta" class="icon-link account-btn" id="account-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="8" r="3.5" />
+              <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" />
+            </svg>
+          </button>
+
+          <div class="account-dropdown" id="account-dropdown">
+            {% if session.get('usuario_id') %}
+            <div class="user-info">
+              <p class="user-name">{{ session.get('usuario_nome') }}</p>
+              <p class="user-email">{{ session.get('usuario_email') }}</p>
+            </div>
+            <hr class="dropdown-divider" />
+            <a href="{{ url_for('carrinho') }}" class="dropdown-item">Meu Carrinho</a>
+            <a href="{{ url_for('listar_pedidos') }}" class="dropdown-item">Meus Pedidos</a>
+            <a href="{{ url_for('logout') }}" class="dropdown-item logout-link">Sair da Conta</a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="dropdown-item">Fazer Login</a>
+            <a href="{{ url_for('registro') }}" class="dropdown-item">Criar Conta</a>
+            {% endif %}
+          </div>
+        </div>
+
+        <a href="{{ url_for('carrinho') }}" aria-label="Carrinho de compras" class="icon-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 8h12l-1 12H7L6 8z" />
+            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="logo">
+        <a href="{{ url_for('index') }}">
+          <img
+            class="brand-image"
+            src="{{ url_for('static', filename='imagens/Logo Marca/logo marca (1).png') }}"
+            alt="Royal Drip Logo"
+          />
+        </a>
+      </div>
+
+      <nav class="nav-principal">
+        <ul>
+          <li><a href="{{ url_for('index') }}#produtos">Lançamentos</a></li>
+          <li><a href="{{ url_for('listar_pedidos') }}">Pedidos</a></li>
+          <li><a href="{{ url_for('index') }}#sobre">Sobre Nós</a></li>
+          <li><a href="{{ url_for('index') }}#contato">Atendimento</a></li>
+        </ul>
+      </nav>
+
+      {% block filtros %}{% endblock %}
+    </header>
+
+    {% with mensagens = get_flashed_messages() %}
+      {% if mensagens %}
+      <div class="alertas" style="max-width: 900px; margin: 16px auto; padding: 0 16px">
+        {% for m in mensagens %}
+        <div class="alerta" style="padding: 12px 16px; border-radius: 8px; background: #f3f3f3; border: 1px solid #ccc; color: #111; margin-bottom: 8px">
+          {{ m }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block conteudo %}{% endblock %}
+
+    <footer class="rodape-principal">
+      <p>&copy; 2026 Royal Drip Streetwear. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+      const accountBtn = document.getElementById("account-btn");
+      const accountDropdown = document.getElementById("account-dropdown");
+
+      if (accountBtn && accountDropdown) {
+        accountBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          accountDropdown.classList.toggle("active");
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!e.target.closest(".account-menu")) {
+            accountDropdown.classList.remove("active");
+          }
+        });
+      }
+    </script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

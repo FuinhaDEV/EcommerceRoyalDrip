@@ -1,0 +1,108 @@
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* Container principal da tela */
+      .container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-top: 0;
+      }
+
+      /* Resumo do pedido */
+      .resumo {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+      }
+
+      .resumo p {
+        margin: 5px 0;
+        color: #555;
+      }
+
+      .resumo .total {
+        font-weight: bold;
+        color: #000;
+        font-size: 1.1em;
+      }
+
+      /* Rótulos dos campos */
+      label {
+        display: block;
+        margin-top: 10px;
+        color: #333;
+        font-weight: bold;
+        font-size: 0.9em;
+      }
+
+      /* Campos de texto e seleção */
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      /* Layout para campos lado a lado (Validade e CVV) */
+      .linha-dupla {
+        display: flex;
+        gap: 10px;
+      }
+
+      .linha-dupla > div {
+        flex: 1;
+      }
+
+      /* Botão de finalizar */
+      .btn-pagar {
+        width: 100%;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 1em;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .btn-pagar:hover {
+        background-color: #218838;
+      }
+
+      /* Estilo para caixas de aviso (PIX e Boleto) */
+      .info-box {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 4px;
+        text-align: center;
+        margin-top: 15px;
+        color: #495057;
+      }
+
+      /* Ocultar elementos via JavaScript */
+      .escondido {
+        display: none;
+      }
