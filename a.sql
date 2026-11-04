@@ -177,7 +177,11 @@ INSERT INTO produtos (id_produto, id_categoria, nome_produto, descricao, preco, 
 (39, 5, 'Cinto Couro Cowboy', 'Cinto de couro cowboy com fivelas e tachas metálicas.', 119.90, 35, 'imagens/cintos/cinto couro cowboy.webp'),
 (40, 1, 'Camisa Boxy Sant BR', 'Camisa Boxy Sant BR com estampa exclusiva e caimento oversized.', 139.90, 40, 'imagens/camisas/camisa box sant br.webp'),
 (41, 1, 'Camisa Boxy Red Los Angeles', 'Camisa Boxy Red Los Angeles com visual urbano e tecido encorpado.', 139.90, 40, 'imagens/camisas/camisa box red los angeles.webp'),
+<<<<<<< HEAD
 (42, 1, 'Camisa Boxy Jersey 22', 'Camisa Boxy Jersey 22 com estilo esportivo e caimento streetwear amplo.', 139.90, 40, 'imagens/camisas/camisa box jersey 22.webp')
+=======
+(42, 1, 'Camisa Boxy blue listrad', 'Camisa Boxy blue listrad com estilo esportivo e caimento streetwear amplo.', 139.90, 40, 'imagens/camisas/camisa box blue listrad.jpeg')
+>>>>>>> 28249812c45178a97b6a364eab6213526503f372
 ON DUPLICATE KEY UPDATE
     id_categoria = VALUES(id_categoria),
     nome_produto = VALUES(nome_produto),

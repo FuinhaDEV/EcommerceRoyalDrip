@@ -19,6 +19,7 @@
     <h2 class="titulo-secao">Nossos Lançamentos</h2>
 
     <div class="produtos-grid">
+<<<<<<< HEAD
       {% if produtos %}
         {% for p in produtos %}
         <a
@@ -40,6 +41,25 @@
       {% else %}
         <p class="sem-produtos">Nenhum produto cadastrado no momento.</p>
       {% endif %}
+=======
+      {% for p in produtos %}
+      <a
+        class="produto-card"
+        data-categoria="{{ p.categoria_slug }}"
+        href="{{ url_for('produto', produto_id=p.id) }}"
+      >
+        <div class="produto-imagem-wrap">
+          <img
+            src="{{ url_for('static', filename=p.imagem) }}"
+            alt="{{ p.titulo }}"
+            loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}"
+            decoding="async"
+          />
+        </div>
+        <span class="produto-nome">{{ p.titulo }}</span>
+      </a>
+      {% endfor %}
+>>>>>>> 28249812c45178a97b6a364eab6213526503f372
     </div>
   </section>
 
@@ -78,4 +98,8 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/navbar_javascript.js') }}" defer></script>
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> 28249812c45178a97b6a364eab6213526503f372
