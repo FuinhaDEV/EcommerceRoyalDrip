@@ -121,12 +121,10 @@ PRODUTOS = {
         "titulo": "polo black",
         "preco": 139.90,
         "imagem": "imagens/camisas/polo black (1).webp",
-=======
         "nome": "camisa boxy sant br",
         "titulo": "Camisa Boxy Sant BR",
         "preco": 139.90,
         "imagem": "imagens/camisas/camisa box sant br.webp",
->>>>>>> 28249812c45178a97b6a364eab6213526503f372
         "descricao": "Camisa Boxy Sant BR com estampa exclusiva e caimento oversized.",
         "tamanhos": ["P", "M", "G", "GG", "XG"],
         "categoria": "Camisetas",
@@ -140,17 +138,14 @@ PRODUTOS = {
     },
     41: {
         "id": 41,
-<<<<<<< HEAD
         "nome": "polo black",
         "titulo": "polo black",
         "preco": 139.90,
         "imagem": "imagens/camisas/polo black (2).webp",
-=======
         "nome": "camisa boxy red los angeles",
         "titulo": "Camisa Boxy Red Los Angeles",
         "preco": 139.90,
         "imagem": "imagens/camisas/camisa box red los angeles.webp",
->>>>>>> 28249812c45178a97b6a364eab6213526503f372
         "descricao": "Camisa Boxy Red Los Angeles com visual urbano e tecido encorpado.",
         "tamanhos": ["P", "M", "G", "GG", "XG"],
         "categoria": "Camisetas",
@@ -162,8 +157,6 @@ PRODUTOS = {
             {"tamanho": "XG", "Q": 100, "A": 115, "L": 40},
         ],
     },
-<<<<<<< HEAD
-=======
     42: {
         "id": 42,
         "nome": "camisa boxy jersey 22",
@@ -181,7 +174,6 @@ PRODUTOS = {
             {"tamanho": "XG", "Q": 100, "A": 115, "L": 40},
         ],
     },
->>>>>>> 28249812c45178a97b6a364eab6213526503f372
 
     # CONJUNTOS (IDs 7 a 12)
     7: {
@@ -201,7 +193,6 @@ PRODUTOS = {
             {"tamanho": "XG", "Q": 99, "A": 114, "L": 41},
         ],
     },
-<<<<<<< HEAD
     
      43: {
             "id": 43,
@@ -238,9 +229,6 @@ PRODUTOS = {
                      {"tamanho": "XG", "Q": 99, "A": 114, "L": 41},
                  ],
              },
-     
-=======
->>>>>>> 28249812c45178a97b6a364eab6213526503f372
     8: {
         "id": 8,
         "nome": "conjunto UK drop2",
