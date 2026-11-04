@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block filtros %}
+<!-- BOTÕES DE FILTRAGEM -->
+<div class="nav-categorias">
+  <button class="btn-filtro active" data-filter="todos">Todos</button>
+  <button class="btn-filtro" data-filter="camisetas">Camisetas</button>
+  <button class="btn-filtro" data-filter="conjuntos">Conjuntos</button>
+  <button class="btn-filtro" data-filter="calcas">Calças</button>
+  <button class="btn-filtro" data-filter="gorros">Gorros</button>
+  <button class="btn-filtro" data-filter="cintos">Cintos</button>
+</div>
+{% endblock %}
+
+{% block conteudo %}
+<main>
+  <!-- Seção de Produtos: gerada em loop a partir do catálogo (produtos.py) -->
+  <section id="produtos" class="secao-container">
+    <h2 class="titulo-secao">Nossos Lançamentos</h2>
+
+    <div class="produtos-grid">
+      {% if produtos %}
+        {% for p in produtos %}
+        <a
+          class="produto-card"
+          data-categoria="{{ p.categoria_slug }}"
+          href="{{ url_for('produto', produto_id=p.id) }}"
+        >
+          <div class="produto-imagem-wrap">
+            <img
+              src="{{ url_for('static', filename=p.imagem) }}"
+              alt="{{ p.titulo }}"
+              loading="{{ 'eager' if loop.index <= 4 else 'lazy' }}"
+              decoding="async"
+            />
+          </div>
+          <span class="produto-nome">{{ p.titulo }}</span>
+        </a>
+        {% endfor %}
+      {% else %}
+        <p class="sem-produtos">Nenhum produto cadastrado no momento.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Seção Sobre -->
+  <section id="sobre" class="info-bloco">
+    <div class="info-conteudo">
+      <h2>Sobre a Royal Drip</h2>
+      <p>
+        Criada no coração do cenário urbano, a Royal Drip nasceu para dar voz à
+        cultura das ruas através do vestuário e da personalidade de cada um.
+        Trabalhamos com tiragens limitadas e coleções exclusivas para garantir
+        originalidade e expressão individual em cada peça que você veste.
+      </p>
+    </div>
+  </section>
+
+  <!-- Seção Contato -->
+  <section id="contato" class="info-bloco">
+    <div class="info-conteudo">
+      <h2>Atendimento &amp; Drops</h2>
+      <p>
+        Deseja tirar dúvidas sobre o tamanho ideal, envios ou ficar por dentro
+        do próximo drop exclusivo? Fale com a nossa equipe:
+      </p>
+      <ul class="contato-lista">
+        <li><strong>E-mail:</strong> Royal.Drip@gmail.com</li>
+        <li><strong>WhatsApp:</strong> (11) 96666-7777</li>
+        <li>
+          <strong>Horário de Atendimento:</strong> Segunda a Sábado, das 10h às 19h
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/navbar_javascript.js') }}" defer></script>
+{% endblock %}
